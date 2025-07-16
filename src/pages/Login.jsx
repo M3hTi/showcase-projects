@@ -1,6 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import Form from "../ui/Form";
 import Button from "../ui/Button";
+import HomeIcon from "../ui/HomeIcon";
 
 function Login() {
   return (
@@ -30,6 +31,7 @@ function Login() {
           </Button>
         </p>
       </div>
+      <HomeIcon />
     </div>
   );
 }

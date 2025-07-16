@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import Form from "../ui/Form";
 import Button from "../ui/Button";
+import HomeIcon from "../ui/HomeIcon";
 
 function Signup() {
   return (
@@ -31,6 +32,7 @@ function Signup() {
           </Button>
         </p>
       </div>
+      <HomeIcon />
     </div>
   );
 }
