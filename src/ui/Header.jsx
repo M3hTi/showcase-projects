@@ -3,25 +3,25 @@ import { FaUserPlus } from "react-icons/fa";
 
 function Header() {
   return (
-    <header className="bg-black p-4 text-white shadow-md">
-      <nav className="container mx-auto flex items-center justify-between">
+    <header className="bg-black px-4 py-6 text-white shadow-lg">
+      <nav className="container mx-auto flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Link
           to="/"
-          className="text-2xl font-bold text-orange-500 hover:text-orange-400"
+          className="text-3xl font-bold text-orange-500 transition-colors hover:text-orange-400"
         >
           Showcase
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <Link
             to="/home"
-            className="text-white transition-colors hover:text-orange-500"
+            className="text-lg font-medium text-white transition-colors hover:text-orange-500"
           >
             Home
           </Link>
           <Link
             to="/signup"
-            className="flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-orange-600"
+            className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
           >
             <FaUserPlus />
             Sign up
