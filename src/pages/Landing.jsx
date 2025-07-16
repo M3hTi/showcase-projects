@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-
+import Button from "../ui/Button";
 function Landing() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4">
@@ -17,12 +16,12 @@ function Landing() {
               practices and creative solutions.
             </p>
             <div className="space-x-4">
-              <Link
+              <Button
                 to="/home"
                 className="inline-block transform rounded-lg bg-orange-500 px-8 py-4 text-lg font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-600"
               >
                 View Projects
-              </Link>
+              </Button>
 
               <a
                 href="https://github.com"
