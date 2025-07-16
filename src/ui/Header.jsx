@@ -14,7 +14,7 @@ function Header() {
 
         <div className="flex items-center gap-6">
           <Link
-            to="/"
+            to="/home"
             className="text-white transition-colors hover:text-orange-500"
           >
             Home
