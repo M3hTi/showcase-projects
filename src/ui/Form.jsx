@@ -33,7 +33,7 @@ function Form({ type }) {
         <div>
           <button
             type="submit"
-            className="group relative flex w-full justify-center rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
+            className="group relative flex w-full cursor-pointer justify-center rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
           >
             Sign in
           </button>
@@ -108,7 +108,7 @@ function Form({ type }) {
       <div>
         <button
           type="submit"
-          className="group relative flex w-full justify-center rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
+          className="group relative flex w-full cursor-pointer justify-center rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
         >
           Sign up
         </button>
