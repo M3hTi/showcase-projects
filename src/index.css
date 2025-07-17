@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .min-h-screen {
+    height: 100dvh;
+  }
+}
