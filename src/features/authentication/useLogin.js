@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { loginApi } from "../../services/authentication";
+import toast from "react-hot-toast";
 
 export function useLogin() {
   const {
@@ -11,11 +12,13 @@ export function useLogin() {
     mutationFn: ({ email, password }) => loginApi({ email, password }),
 
     onSuccess: () => {
-      console.log("You Entered Successfully!");
+      //   console.log("You Entered Successfully!");
+      toast.success("You Entered Successfully!");
     },
 
     onError: (error) => {
-      console.log(error.message);
+    //   console.log(error.message);
+      toast.error(error.message);
     },
   });
 
