@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import Error from "./Error";
 import { useLogin } from "../features/authentication/useLogin";
-
+import { useEffect, useState } from "react";
+import MiniLoading from "./MiniLoading";
 function Form({ type }) {
+  const [submitForm, setSubmitForm] = useState(false);
   const {
     register,
     handleSubmit,
@@ -13,11 +15,19 @@ function Form({ type }) {
 
   const { login, isPending, isError, error } = useLogin();
 
+  useEffect(() => {
+    setTimeout(() => {
+      setSubmitForm(false);
+    }, 2000);
+  }, [submitForm]);
+
   function submit(data) {
     if (type === "login") {
       console.log("Login data:", data);
       const { email, password } = data;
       login({ email, password });
+      setSubmitForm(true);
+      reset();
     } else {
       console.log("Signup data:", data);
     }
@@ -86,7 +96,7 @@ function Form({ type }) {
             type="submit"
             className="group relative flex w-full cursor-pointer justify-center rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
           >
-            Sign in
+            {isPending ? <MiniLoading /> : "Sign in"}
           </button>
         </div>
 
