@@ -1,5 +1,8 @@
+import { useProjects } from "./useProjects";
+
 function Home() {
-  const projects = [];
+  const {projects, isLoading, isError, error} = useProjects()
+
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-12">
       <div className="container mx-auto">
@@ -8,7 +11,7 @@ function Home() {
           <span className="text-orange-500">Projects</span>
         </h1>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+          {projects?.map((project) => (
             <div
               key={project.id}
               className="group overflow-hidden rounded-lg bg-black/40 backdrop-blur-sm transition-transform hover:-translate-y-2"
