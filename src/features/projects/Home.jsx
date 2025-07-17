@@ -1,7 +1,17 @@
+import Error from "../../ui/Error";
+import Loading from "../../ui/Loading";
 import { useProjects } from "./useProjects";
 
 function Home() {
-  const {projects, isLoading, isError, error} = useProjects()
+  const { projects, isLoading, isError, error } = useProjects();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!isLoading && isError) {
+    return <Error>{error.message}</Error>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-12">
