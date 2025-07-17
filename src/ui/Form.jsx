@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import Error from "./Error";
+import { useLogin } from "../features/authentication/useLogin";
 
 function Form({ type }) {
   const {
@@ -10,12 +11,13 @@ function Form({ type }) {
     getValues,
   } = useForm();
 
-  
+  const { login, isPending, isError, error } = useLogin();
 
   function submit(data) {
     if (type === "login") {
       console.log("Login data:", data);
       const { email, password } = data;
+      login({ email, password });
     } else {
       console.log("Signup data:", data);
     }
@@ -68,8 +70,7 @@ function Form({ type }) {
               {...register("password", {
                 required: "Please Enter Your Password",
                 pattern: {
-                  value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/,
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/,
                   message:
                     "Password must be 8–16 characters long and include at least one uppercase letter, one number, and one special character.",
                 },
@@ -161,8 +162,7 @@ function Form({ type }) {
             {...register("password", {
               required: "Please Enter Your Password",
               pattern: {
-                value:
-                 /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/,
+                value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/,
                 message:
                   "Password must be 8–16 characters long and include at least one uppercase letter, one number, and one special character.",
               },
