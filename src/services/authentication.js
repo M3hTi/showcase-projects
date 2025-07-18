@@ -24,6 +24,19 @@ export async function loginApi({ email, password }) {
   }
 }
 
+// for log out
+export async function logOutApi() {
+  try {
+    let { error } = await supabase.auth.signOut();
+
+    if (error)
+      throw new Error(`You can't signout right now!!, Error: ${error.message}`);
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
+
 /**
  * Retrieves the currently authenticated user from Supabase.
  * @async
