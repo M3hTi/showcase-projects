@@ -59,3 +59,21 @@ export async function getCurrentUser() {
     throw error;
   }
 }
+
+export async function updateUser({ email, password, data: { fullname, bio } }) {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      email,
+      password,
+      data: { fullname, bio },
+    });
+
+    if (error)
+      throw new Error(
+        `You can't update information at this point!, pls comeback later.`,
+      );
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
