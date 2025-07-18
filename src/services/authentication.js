@@ -23,3 +23,26 @@ export async function loginApi({ email, password }) {
     throw error;
   }
 }
+
+/**
+ * Retrieves the currently authenticated user from Supabase.
+ * @async
+ * @function getCurrentUser
+ * @returns {Promise<Object|null>} Returns the user object if authenticated, null if no session exists
+ * @throws {Error} Throws an error if authentication check fails
+ */
+export async function getCurrentUser() {
+  try {
+    const { data: session } = await supabase.auth.getSession();
+    if (!session.session) return null;
+
+    const { data: user, error } = await supabase.auth.getUser();
+
+    if (error) throw new Error(`An Error occurred!, Error: ${error.message} `);
+
+    return user?.user;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
