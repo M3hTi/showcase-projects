@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PageNotFound from "./ui/PageNotFound";
 import { Toaster } from "react-hot-toast";
 import ProtectRoute from "./ui/ProtectRoute";
-import User from "./features/authentication/User";
+import UserPage from "./pages/UserPage";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ function App() {
               path="/user"
               element={
                 <ProtectRoute>
-                  <User />
+                  <UserPage />
                 </ProtectRoute>
               }
             />
