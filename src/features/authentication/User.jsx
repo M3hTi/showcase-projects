@@ -2,12 +2,13 @@ import Header from "../../ui/Header";
 import Button from "../../ui/Button";
 import { useUser } from "./useUser";
 import { Link } from "react-router-dom";
-
+import { useLogout } from "./useLogout";
+import MiniLoading from "../../ui/MiniLoading";
 
 function User() {
   const { user } = useUser();
 
-
+  const { logOut, isPending } = useLogout();
 
   return (
     <div className="bg-gray-900">
@@ -91,12 +92,15 @@ function User() {
                 <div className="flex justify-between">
                   <Button
                     to="/home"
-                    className="rounded-lg bg-orange-500 px-6 py-3 font-medium text-white transition-all hover:bg-orange-600"
+                    className="cursor-pointer rounded-lg border-2 border-orange-500 px-6 py-3 font-medium text-orange-500 transition-all hover:bg-orange-500 hover:text-white"
                   >
                     Back to Home
                   </Button>
-                  <Button className="rounded-lg border-2 border-orange-500 px-6 py-3 font-medium text-orange-500 transition-all hover:bg-orange-500 hover:text-white">
-                    Sign Out
+                  <Button
+                    onClick={() => logOut()}
+                    className="rounded-lg cursor-pointer bg-orange-500 px-6 py-3 font-medium text-white transition-all hover:bg-orange-600"
+                  >
+                    {isPending ? <MiniLoading /> : " Sign Out"}
                   </Button>
                 </div>
               </div>
