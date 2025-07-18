@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaUserPlus } from "react-icons/fa";
+import { useUser } from "../features/authentication/useUser";
+import Button from "../ui/Button";
 
 function Header() {
+  const { user, isAuthenticate } = useUser();
   return (
     <header className="bg-black px-4 py-6 text-white shadow-lg">
       <nav className="container mx-auto flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -19,13 +22,22 @@ function Header() {
           >
             Home
           </Link>
-          <Link
-            to="/signup"
-            className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
-          >
-            <FaUserPlus />
-            Sign up
-          </Link>
+          {isAuthenticate ? (
+            <Button
+              to="user"
+              className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
+            >
+              {user.email}
+            </Button>
+          ) : (
+            <Link
+              to="/signup"
+              className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
+            >
+              <FaUserPlus />
+              Sign up
+            </Link>
+          )}
         </div>
       </nav>
     </header>

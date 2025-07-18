@@ -1,11 +1,10 @@
-import { FaGithub } from "react-icons/fa";
-import Form from "../ui/Form";
-import Button from "../ui/Button";
-import HomeIcon from "../ui/HomeIcon";
+import Button from "../../ui/Button"
+import Form from "../../ui/Form"
+import HomeIcon from "../../ui/HomeIcon"
 
-function Login() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900 px-4 py-12">
+function Signup() {
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-gray-900 px-4 py-12">
       <div className="w-full max-w-md space-y-8 rounded-xl bg-black/40 p-8 backdrop-blur-sm">
         <div className="text-center">
           <Button
@@ -15,25 +14,25 @@ function Login() {
             Showcase
           </Button>
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-white">
-            Welcome back
+            Create your account
           </h2>
           <p className="mt-2 text-sm text-gray-400">
-            Sign in to continue to your portfolio
+            Start showcasing your projects today
           </p>
         </div>
 
-        <Form type="login" />
+        <Form type="signup" />
 
         <p className="mt-4 text-center text-sm text-gray-400">
-          Not registered yet?{" "}
-          <Button to="/signup" className="text-orange-500 hover:text-orange-400">
-            Create an account
+          Already have an account?{" "}
+          <Button to="/login" className="text-orange-500 hover:text-orange-400">
+            Sign in
           </Button>
         </p>
       </div>
       <HomeIcon />
     </div>
-  );
+    )
 }
 
-export default Login;
+export default Signup

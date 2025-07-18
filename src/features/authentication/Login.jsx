@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
-import { FaGithub } from "react-icons/fa";
-import Form from "../ui/Form";
-import Button from "../ui/Button";
-import HomeIcon from "../ui/HomeIcon";
+import Button from "../../ui/Button";
+import Form from "../../ui/Form";
+import HomeIcon from "../../ui/HomeIcon";
 
-function Signup() {
+function Login() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-900 px-4 py-12">
       <div className="w-full max-w-md space-y-8 rounded-xl bg-black/40 p-8 backdrop-blur-sm">
@@ -16,19 +14,22 @@ function Signup() {
             Showcase
           </Button>
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-white">
-            Create your account
+            Welcome back
           </h2>
           <p className="mt-2 text-sm text-gray-400">
-            Start showcasing your projects today
+            Sign in to continue to your portfolio
           </p>
         </div>
 
-        <Form type="signup" />
+        <Form type="login" />
 
         <p className="mt-4 text-center text-sm text-gray-400">
-          Already have an account?{" "}
-          <Button to="/login" className="text-orange-500 hover:text-orange-400">
-            Sign in
+          Not registered yet?{" "}
+          <Button
+            to="/signup"
+            className="text-orange-500 hover:text-orange-400"
+          >
+            Create an account
           </Button>
         </p>
       </div>
@@ -37,4 +38,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;
