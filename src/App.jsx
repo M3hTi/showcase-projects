@@ -6,6 +6,8 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import ProtectRoute from "./ui/ProtectRoute";
+import User from "./features/authentication/User";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,14 @@ function App() {
             </Route>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/user"
+              element={
+                <ProtectRoute>
+                  <User />
+                </ProtectRoute>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
