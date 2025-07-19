@@ -3,6 +3,8 @@ import Error from "./Error";
 import { useLogin } from "../features/authentication/useLogin";
 import { useEffect, useState } from "react";
 import MiniLoading from "./MiniLoading";
+import { useSignup } from "../features/authentication/useSignup";
+import toast from "react-hot-toast";
 function Form({ type }) {
   const [submitForm, setSubmitForm] = useState(false);
   const {
@@ -14,6 +16,8 @@ function Form({ type }) {
   } = useForm();
 
   const { login, isPending, isError, error } = useLogin();
+
+  const { signup, signingUp } = useSignup();
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,6 +34,12 @@ function Form({ type }) {
       reset();
     } else {
       console.log("Signup data:", data);
+      signup(data, {
+        onError: (err) => {
+          toast.error(err.message);
+          reset();
+        },
+      });
     }
   }
 
@@ -114,29 +124,6 @@ function Form({ type }) {
     <form className="mt-8 space-y-6" onSubmit={handleSubmit(submit, error)}>
       <div className="space-y-4 rounded-md">
         <div>
-          <label htmlFor="username" className="sr-only">
-            Username
-          </label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            required
-            className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
-            placeholder="Username"
-            {...register("username", {
-              required: "Please Enter Your Username",
-              minLength: {
-                value: 3,
-                message: "Username must be at least 3 characters long",
-              },
-            })}
-          />
-          {errors?.username?.message && (
-            <Error>{errors.username.message}</Error>
-          )}
-        </div>
-        <div>
           <label htmlFor="email" className="sr-only">
             Email address
           </label>
@@ -212,7 +199,7 @@ function Form({ type }) {
           type="submit"
           className="group relative flex w-full cursor-pointer justify-center rounded-lg bg-orange-500 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:ring-2 focus:ring-orange-500/20 focus:outline-none"
         >
-          Sign up
+          {signingUp ? <MiniLoading /> : "Sign up"}
         </button>
       </div>
 

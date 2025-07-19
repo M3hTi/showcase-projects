@@ -37,6 +37,23 @@ export async function logOutApi() {
   }
 }
 
+export async function signUpApi({ email, password }) {
+  try {
+    let { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error)
+      throw new Error(
+        `You can't signup at this moment, Please try again later!`,
+      );
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
+
 /**
  * Retrieves the currently authenticated user from Supabase.
  * @async
