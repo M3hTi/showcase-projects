@@ -9,6 +9,7 @@ import PageNotFound from "./ui/PageNotFound";
 import { Toaster } from "react-hot-toast";
 import ProtectRoute from "./ui/ProtectRoute";
 import User from "./features/authentication/User";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AppLayout />}>
