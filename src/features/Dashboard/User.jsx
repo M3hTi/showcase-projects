@@ -26,13 +26,16 @@ function User() {
       email: user?.email,
       fullname: user?.user_metadata?.fullname,
       bio: user?.user_metadata?.bio,
+      expertise: user?.user_metadata?.expertiseArr?.join(","),
     },
   });
 
   function submit(data) {
     console.log(data);
 
-    const { email, password, fullname, bio } = data;
+    const { email, password, fullname, bio, expertise } = data;
+
+    const expertiseArr = expertise.split(",");
 
     const currentEmail = user?.email;
     const emailToSend = email !== currentEmail ? email : null;
@@ -42,8 +45,10 @@ function User() {
     const newData = {
       email: emailToSend,
       password: passwordToSend,
-      data: { fullname, bio },
+      data: { fullname, bio, expertiseArr },
     };
+
+    console.log(newData);
 
     updateUserInfo(newData, {
       onSuccess: () => {
@@ -165,6 +170,22 @@ function User() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-400">
+                        Expertise
+                      </label>
+                      <input
+                        type="expertise"
+                        className="mt-1 w-full rounded-lg bg-gray-800 p-2 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                        placeholder="Please Enter Your Expertise"
+                        {...register("expertise", {
+                          required: "Please Enter Your at least 1 Expertise!",
+                        })}
+                      />
+                      {errors?.expertise?.message && (
+                        <Error>{errors.expertise.message}</Error>
+                      )}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400">
                         Bio
                       </label>
                       <textarea
@@ -189,7 +210,7 @@ function User() {
                         type="submit"
                         className="cursor-pointer rounded-lg bg-orange-500 px-6 py-3 font-medium text-white transition-all hover:bg-orange-600"
                       >
-                        Save Changes
+                        {updating ? <MiniLoading /> : "Save Changes"}
                       </button>
                     </div>
                   </form>

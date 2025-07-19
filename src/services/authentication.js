@@ -60,10 +60,10 @@ export async function getCurrentUser() {
   }
 }
 
-export async function updateUser({ email, password, data: { fullname, bio } }) {
+export async function updateUser({ email, password, data: { fullname, bio, expertiseArr } }) {
   try {
     const updateData = {
-      data: { fullname, bio },
+      data: { fullname, bio, expertiseArr },
     };
 
     if (email) {
