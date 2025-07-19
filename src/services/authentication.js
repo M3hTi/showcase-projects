@@ -76,3 +76,28 @@ export async function getCurrentUser() {
     throw error;
   }
 }
+
+export async function updateUser({ email, password, data: { fullname, bio, expertiseArr } }) {
+  try {
+    const updateData = {
+      data: { fullname, bio, expertiseArr },
+    };
+
+    if (email) {
+      updateData.email = email;
+    }
+
+    if (password && password.trim() !== "") {
+      updateData.password = password;
+    }
+    const { data, error } = await supabase.auth.updateUser(updateData);
+
+    if (error)
+      throw new Error(
+        `You can't update information at this point!, pls comeback later.`,
+      );
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
