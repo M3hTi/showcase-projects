@@ -62,11 +62,18 @@ export async function getCurrentUser() {
 
 export async function updateUser({ email, password, data: { fullname, bio } }) {
   try {
-    const { data, error } = await supabase.auth.updateUser({
-      email,
-      password,
+    const updateData = {
       data: { fullname, bio },
-    });
+    };
+
+    if (email) {
+      updateData.email = email;
+    }
+
+    if (password && password.trim() !== "") {
+      updateData.password = password;
+    }
+    const { data, error } = await supabase.auth.updateUser(updateData);
 
     if (error)
       throw new Error(

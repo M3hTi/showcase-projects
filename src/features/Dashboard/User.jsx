@@ -25,7 +25,7 @@ function User() {
     defaultValues: {
       email: user?.email,
       fullname: user?.user_metadata?.fullname,
-      bio: user?.user_metadata?.bio
+      bio: user?.user_metadata?.bio,
     },
   });
 
@@ -34,7 +34,16 @@ function User() {
 
     const { email, password, fullname, bio } = data;
 
-    const newData = { email, password, data: { fullname, bio } };
+    const currentEmail = user?.email;
+    const emailToSend = email !== currentEmail ? email : null;
+
+    const passwordToSend = password && password.trim() !== "" ? password : null;
+
+    const newData = {
+      email: emailToSend,
+      password: passwordToSend,
+      data: { fullname, bio },
+    };
 
     updateUserInfo(newData, {
       onSuccess: () => {
@@ -43,6 +52,7 @@ function User() {
       },
 
       onError: (err) => {
+        console.error("Update error:", err);
         toast.error(`${err.message}`);
         reset();
       },
@@ -139,9 +149,8 @@ function User() {
                       <input
                         type="password"
                         className="mt-1 w-full rounded-lg bg-gray-800 p-2 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
-                        placeholder="Enter your password"
+                        placeholder="Leave empty to keep current password"
                         {...register("password", {
-                          required: "Please Enter Your Email",
                           pattern: {
                             value:
                               /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/,
