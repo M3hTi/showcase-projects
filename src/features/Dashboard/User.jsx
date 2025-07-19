@@ -67,7 +67,7 @@ function User() {
   return (
     <div className="bg-gray-900">
       <Header />
-      <div className="min-h-screen px-4 py-12">
+      <div className="px-4 py-12">
         <div className="container mx-auto max-w-4xl">
           <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
             <div className="space-y-8">
