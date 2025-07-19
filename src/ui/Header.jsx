@@ -24,19 +24,19 @@ function Header() {
           </Link>
           {isAuthenticate ? (
             <Button
-              to="user"
+              to="profile"
               className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
             >
               {user?.user_metadata?.fullname || user.email}
             </Button>
           ) : (
-            <Link
+            <Button
               to="/signup"
               className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
             >
               <FaUserPlus />
               Sign up
-            </Link>
+            </Button>
           )}
         </div>
       </nav>
