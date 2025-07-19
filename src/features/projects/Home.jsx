@@ -15,7 +15,7 @@ function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 px-4 py-12">
+    <div className="h-full overflow-y-auto bg-gray-900 px-4 py-12">
       <div className="container mx-auto">
         <h1 className="mb-12 text-center text-4xl font-bold">
           <span className="text-white">Featured</span>{" "}
