@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import Error from "../../ui/Error";
 import { useUpdateInfo } from "./useUpdateInfo";
 import toast from "react-hot-toast";
+import UserHeading from "../../ui/UserHeading";
 
 function User() {
   const { user } = useUser();
@@ -71,14 +72,7 @@ function User() {
         <div className="container mx-auto max-w-4xl">
           <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
             <div className="space-y-8">
-              <div className="text-center">
-                <h1 className="text-3xl font-bold text-white">
-                  User Dashboard
-                </h1>
-                <p className="mt-2 text-gray-400">
-                  Manage your profile and projects
-                </p>
-              </div>
+              <UserHeading />
 
               {/* Tab Navigation */}
               <div className="flex space-x-4 border-b border-gray-700">
