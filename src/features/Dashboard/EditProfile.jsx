@@ -1,4 +1,3 @@
-import Header from "../../ui/Header";
 import Button from "../../ui/Button";
 import { useUser } from "../authentication/useUser";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import { useUpdateInfo } from "./useUpdateInfo";
 import toast from "react-hot-toast";
 import UserHeading from "../../ui/UserHeading";
 
-function User() {
+function EditProfile() {
   const { user } = useUser();
 
   const { logOut, isPending } = useLogout();
@@ -66,8 +65,7 @@ function User() {
   }
 
   return (
-    <div className="bg-gray-900">
-      <Header />
+    <div className="h-full overflow-y-auto bg-gray-900">
       <div className="px-4 py-12">
         <div className="container mx-auto max-w-4xl">
           <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
@@ -77,7 +75,7 @@ function User() {
               {/* Tab Navigation */}
               <div className="flex space-x-4 border-b border-gray-700">
                 <Link
-                  to="/profile/edit"
+                  to="/profile"
                   className="border-b-2 border-orange-500 px-4 py-2 text-orange-500"
                 >
                   Edit Profile
@@ -234,4 +232,4 @@ function User() {
   );
 }
 
-export default User;
+export default EditProfile;

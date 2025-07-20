@@ -9,7 +9,8 @@ import PageNotFound from "./ui/PageNotFound";
 import { Toaster } from "react-hot-toast";
 import ProtectRoute from "./ui/ProtectRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import UserPage from "./pages/UserPage";
+import DashboardEditProfile from "./pages/DashboardEditProfile";
+import DashboardProject from "./pages/DashboardProject";
 
 const queryClient = new QueryClient();
 
@@ -23,17 +24,25 @@ function App() {
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Landing />} />
               <Route path="/home" element={<HomePage />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectRoute>
+                    <DashboardEditProfile />
+                  </ProtectRoute>
+                }
+              />
+              <Route
+                path="/profile/create-project"
+                element={
+                  <ProtectRoute>
+                    <DashboardProject />
+                  </ProtectRoute>
+                }
+              />
             </Route>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/user"
-              element={
-                <ProtectRoute>
-                  <UserPage />
-                </ProtectRoute>
-              }
-            />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
