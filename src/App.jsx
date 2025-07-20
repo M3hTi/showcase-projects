@@ -9,8 +9,9 @@ import PageNotFound from "./ui/PageNotFound";
 import { Toaster } from "react-hot-toast";
 import ProtectRoute from "./ui/ProtectRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import DashboardEditProfile from "./pages/DashboardEditProfile";
-import DashboardProject from "./pages/DashboardProject";
+import DashboardLayout from "./features/Dashboard/DashboardLayout";
+import EditProfile from "./features/Dashboard/EditProfile";
+import CreateProject from "./features/Dashboard/CreateProject";
 
 const queryClient = new QueryClient();
 
@@ -28,18 +29,15 @@ function App() {
                 path="/profile"
                 element={
                   <ProtectRoute>
-                    <DashboardEditProfile />
+                    <DashboardLayout />
                   </ProtectRoute>
                 }
-              />
-              <Route
-                path="/profile/create-project"
-                element={
-                  <ProtectRoute>
-                    <DashboardProject />
-                  </ProtectRoute>
-                }
-              />
+              >
+                <Route index element={<EditProfile />} />
+                <Route path="create-project" element={<CreateProject />} />
+                {/* Add more dashboard routes here as needed */}
+                <Route path="my-projects" element={<div className="p-8 text-white">My Projects - Coming Soon</div>} />
+              </Route>
             </Route>
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
