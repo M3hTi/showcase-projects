@@ -15,8 +15,6 @@ export async function getProjects() {
   }
 }
 
-
-
 /**
  * Creates a new project in the Supabase database
  * @param {Object} projectData - The project data object
@@ -47,6 +45,8 @@ export async function createProjectApi(projectData) {
       throw new Error(
         "You can't add or create project at this point, please try again later!!",
       );
+
+    return data;
   } catch (error) {
     console.log(error.message);
     throw error;
