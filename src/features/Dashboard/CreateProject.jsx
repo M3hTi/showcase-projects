@@ -161,14 +161,14 @@ function CreateProject() {
                         type="file"
                         name="image"
                         accept="image/*"
-                        // {...register("image", {
-                        //   required: "Please upload your project image",
-                        // })}
+                        {...register("image", {
+                          required: "Please upload your project image",
+                        })}
                         className="mt-1 w-full cursor-pointer rounded-lg bg-gray-800 p-2 text-white file:mr-4 file:rounded-lg file:border-0 file:bg-orange-500 file:px-4 file:py-2 file:text-white hover:file:bg-orange-600 focus:ring-2 focus:ring-orange-500 focus:outline-none"
                       />
-                      {/* {errors?.image?.message && (
+                      {errors?.image?.message && (
                         <Error>{errors?.image?.message}</Error>
-                      )} */}
+                      )}
                     </div>
 
                     <div className="mt-6 flex justify-end">
