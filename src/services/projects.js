@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 /**
  * Fetches all projects from the Supabase database
  * @returns {Promise<Array>} Array of project objects, or undefined if there's an error
@@ -27,7 +27,15 @@ export async function getProjects() {
  */
 export async function createProjectApi(projectData) {
   try {
-    const { name, description, githubUrl, demoUrl, user_id } = projectData;
+    const { name, description, githubUrl, demoUrl, user_id, image } =
+      projectData;
+
+    const imageFile = image[0];
+
+    const imageName = `${Math.random()}-${imageFile?.name}`.replaceAll("/", "");
+
+    const imagePath = `${supabaseUrl}/storage/v1/object/public/projects-image//${imageName}`;
+
     const { data, error } = await supabase
       .from("projects")
       .insert([
@@ -37,6 +45,7 @@ export async function createProjectApi(projectData) {
           github_url: githubUrl,
           livedemo_url: demoUrl,
           user_id,
+          image: imagePath,
         },
       ])
       .select();
@@ -45,6 +54,14 @@ export async function createProjectApi(projectData) {
       throw new Error(
         "You can't add or create project at this point, please try again later!!",
       );
+
+    // 2.uploading image into bucket
+    const { error: uploadError } = await supabase.storage
+      .from("projects-image")
+      .upload(imageName, imageFile);
+
+    if (uploadError)
+      throw new Error(`You can't upload your image, Please try again later!!`);
 
     return data;
   } catch (error) {
