@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import ProtectRoute from "./ui/ProtectRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DashboardEditProfile from "./pages/DashboardEditProfile";
+import DashboardProject from "./pages/DashboardProject";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,14 @@ function App() {
                 element={
                   <ProtectRoute>
                     <DashboardEditProfile />
+                  </ProtectRoute>
+                }
+              />
+              <Route
+                path="/profile/create-project"
+                element={
+                  <ProtectRoute>
+                    <DashboardProject />
                   </ProtectRoute>
                 }
               />
