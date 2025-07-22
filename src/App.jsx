@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DashboardLayout from "./features/Dashboard/DashboardLayout";
 import EditProfile from "./features/Dashboard/EditProfile";
 import CreateProject from "./features/Dashboard/CreateProject";
+import Profile from "./features/Dashboard/Profile";
 
 const queryClient = new QueryClient();
 
@@ -33,10 +34,9 @@ function App() {
                   </ProtectRoute>
                 }
               >
-                <Route index element={<EditProfile />} />
+                <Route path="my-projects" index element={<Profile />} />
+                <Route path="edit" element={<EditProfile />} />
                 <Route path="create-project" element={<CreateProject />} />
-                {/* Add more dashboard routes here as needed */}
-                <Route path="my-projects" element={<div className="p-8 text-white">My Projects - Coming Soon</div>} />
               </Route>
             </Route>
             <Route path="/signup" element={<SignupPage />} />
