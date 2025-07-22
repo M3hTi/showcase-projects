@@ -69,3 +69,20 @@ export async function createProjectApi(projectData) {
     throw error;
   }
 }
+
+export async function getSpecificProjects(user_id) {
+  try {
+    let { data: projects, error } = await supabase
+      .from("projects")
+      .select("*")
+      .eq("user_id", user_id);
+
+    if (error)
+      throw new Error(`We can't get your projects, Error: ${error.message}`);
+
+    return projects;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+}
