@@ -10,7 +10,7 @@ export function useSignup() {
 
     onSuccess: () => {
       console.log("You Successfully Create an account");
-      toast.success("You Successfully Create an account 🎉");
+      toast.success("You Successfully Create an account 🎉, Please confirm your Email");
       navigate("/login");
     },
   });
