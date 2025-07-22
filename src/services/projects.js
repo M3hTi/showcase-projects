@@ -11,7 +11,7 @@ export async function getProjects(userId = null) {
       query = await query.eq("user_id", userId);
     }
 
-    let { data: projects, error } = await query
+    let { data: projects, error } = await query;
     if (error)
       throw new Error(`We can't fetch projects, Error : ${error.message}`);
 
@@ -76,3 +76,41 @@ export async function createProjectApi(projectData) {
   }
 }
 
+export async function deleteProjectApi(projectId) {
+  try {
+    
+    const { data: projectToDelete, error: fetchError } = await supabase
+      .from("projects")
+      .select("name")
+      .eq("id", projectId)
+      .single();
+
+    console.log("Project to delete:", projectToDelete); // Debug log
+
+    if (fetchError) {
+      console.error("Fetch error:", fetchError); // Debug log
+      throw new Error(
+        `You can't fetch this project, Please try again later!!`,
+      );
+    }
+
+    
+    const { error: deleteError } = await supabase
+      .from("projects")
+      .delete()
+      .eq("id", projectId);
+
+    if (deleteError) {
+      console.error("Delete error:", deleteError); // Debug log
+      throw new Error(
+        `You can't delete this project at this point, Please try again later!!`,
+      );
+    }
+
+    console.log("Returning:", projectToDelete); // Debug log
+    return projectToDelete;
+  } catch (error) {
+    console.error("Delete API error:", error);
+    throw error;
+  }
+}
