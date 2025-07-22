@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import MiniLoading from "./MiniLoading";
 
 function Header() {
-  const { user, isAuthenticate } = useUser();
+  const { user, loadingUser, isAuthenticate } = useUser();
   return (
     <header className="bg-black px-4 py-6 text-white shadow-lg">
       <nav className="container mx-auto flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -23,20 +23,26 @@ function Header() {
           >
             Home
           </Link>
-          {isAuthenticate ? (
-            <Button
-              to="/profile/my-projects"
-              className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
-            >
-              {user?.user_metadata?.fullname || user.email}
-            </Button>
-          ) : (
+          {loadingUser && (
+            <div className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25">
+              <MiniLoading />
+            </div>
+          )}
+          {!loadingUser && !isAuthenticate && (
             <Button
               to="/signup"
               className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
             >
               <FaUserPlus />
               Sign up
+            </Button>
+          )}
+          {!loadingUser && isAuthenticate && (
+            <Button
+              to="/profile/my-projects"
+              className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
+            >
+              {user?.user_metadata?.fullname || user.email}
             </Button>
           )}
         </div>
