@@ -2,9 +2,13 @@ import { useUser } from "../authentication/useUser";
 import { useUserProjects } from "./useUserProjects";
 import Loading from "../../ui/Loading";
 import Error from "../../ui/Error";
+import Button from "../../ui/Button";
+import MiniLoading from "../../ui/MiniLoading";
+import { useLogout } from "../authentication/useLogout";
 
 function Profile() {
   const { user } = useUser();
+  const { logOut, isPending } = useLogout();
 
   const {
     email,
@@ -22,7 +26,15 @@ function Profile() {
         <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
           <h2 className="mb-6 text-2xl font-semibold">Developer Biography</h2>
           <div className="space-y-4">
-            <p className="text-xl">{fullname || email}</p>
+            <div className="flex items-center justify-between">
+              <p className="text-xl">{fullname || email}</p>
+              <Button
+                onClick={logOut}
+                className="cursor-pointer rounded-lg bg-red-500 px-6 py-3 font-medium text-white transition-all hover:bg-red-600"
+              >
+                {isPending ? <MiniLoading /> : "Sign Out"}
+              </Button>
+            </div>
             <p className="text-gray-300">
               {bio ||
                 "A passionate developer dedicated to creating innovative solutions and delivering exceptional user experiences."}

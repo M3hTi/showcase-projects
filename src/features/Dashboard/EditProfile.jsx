@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 
 function EditProfile() {
   const { user } = useUser();
-  const { logOut, isPending } = useLogout();
   const { updateUserInfo, updating } = useUpdateInfo();
 
   const {
@@ -176,15 +175,6 @@ function EditProfile() {
               >
                 {updating ? <MiniLoading /> : "Save Changes"}
               </button>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  logOut();
-                }}
-                className="cursor-pointer rounded-lg bg-red-500 px-6 py-3 font-medium text-white transition-all hover:bg-red-600"
-              >
-                {isPending ? <MiniLoading /> : "Sign Out"}
-              </Button>
             </div>
           </form>
         </div>
