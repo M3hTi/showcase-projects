@@ -24,7 +24,7 @@ function Landing() {
               </Button>
 
               <a
-                href="https://github.com"
+                href="https://github.com/M3hTi/showcase-projects"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block transform rounded-lg border-2 border-orange-500 px-6 py-3 text-base font-semibold text-orange-500 transition-all duration-200 hover:-translate-y-0.5 hover:bg-orange-500 hover:text-white lg:px-8 lg:py-4 lg:text-lg"
