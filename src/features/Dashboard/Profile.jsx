@@ -1,10 +1,10 @@
 import { useUser } from "../authentication/useUser";
-import { useUserProjects } from "./useUserProjects";
 import Loading from "../../ui/Loading";
 import Error from "../../ui/Error";
 import Button from "../../ui/Button";
 import MiniLoading from "../../ui/MiniLoading";
 import { useLogout } from "../authentication/useLogout";
+import { useProjects } from "../projects/useProjects";
 
 function Profile() {
   const { user } = useUser();
@@ -15,9 +15,7 @@ function Profile() {
     user_metadata: { fullname, expertiseArr, bio },
   } = user || {};
 
-  const { developerProjects, isLoading, isError, error } = useUserProjects();
-
-  console.log(developerProjects);
+  const { projects, isLoading, isError, error } = useProjects(true);
 
   return (
     <div className="p-8">
@@ -51,10 +49,11 @@ function Profile() {
         {/* Projects Section */}
         <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
           <h2 className="mb-6 text-2xl font-semibold">My Projects</h2>
+
           {isLoading && <Loading />}
           {!isLoading && isError && <Error>{error.message}</Error>}
           <div className="space-y-6">
-            {!isLoading && !isError && developerProjects?.length === 0 && (
+            {!isLoading && !isError && projects?.length === 0 && (
               <div className="py-8 text-center">
                 <p className="mb-2 text-gray-300">
                   No projects to display yet.
@@ -64,7 +63,7 @@ function Profile() {
                 </p>
               </div>
             )}
-            {developerProjects?.map((project, index) => (
+            {projects?.map((project, index) => (
               <div key={index} className="rounded-lg bg-gray-700/50 p-6">
                 <h3 className="mb-2 text-xl font-medium">
                   {project.name || `Project ${index + 1}`}

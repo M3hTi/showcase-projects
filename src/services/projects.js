@@ -3,9 +3,15 @@ import supabase, { supabaseUrl } from "./supabase";
  * Fetches all projects from the Supabase database
  * @returns {Promise<Array>} Array of project objects, or undefined if there's an error
  */
-export async function getProjects() {
+export async function getProjects(userId = null) {
   try {
-    let { data: projects, error } = await supabase.from("projects").select("*");
+    let query = supabase.from("projects").select("*");
+
+    if (userId) {
+      query = await query.eq("user_id", userId);
+    }
+
+    let { data: projects, error } = await query
     if (error)
       throw new Error(`We can't fetch projects, Error : ${error.message}`);
 
@@ -70,19 +76,3 @@ export async function createProjectApi(projectData) {
   }
 }
 
-export async function getSpecificProjects(user_id) {
-  try {
-    let { data: projects, error } = await supabase
-      .from("projects")
-      .select("*")
-      .eq("user_id", user_id);
-
-    if (error)
-      throw new Error(`We can't get your projects, Error: ${error.message}`);
-
-    return projects;
-  } catch (error) {
-    console.log(error.message);
-    throw error;
-  }
-}
