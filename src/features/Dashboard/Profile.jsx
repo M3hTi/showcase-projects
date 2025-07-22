@@ -5,6 +5,7 @@ import Button from "../../ui/Button";
 import MiniLoading from "../../ui/MiniLoading";
 import { useLogout } from "../authentication/useLogout";
 import { useProjects } from "../projects/useProjects";
+import { FiExternalLink } from "react-icons/fi";
 
 function Profile() {
   const { user } = useUser();
@@ -64,34 +65,43 @@ function Profile() {
               </div>
             )}
             {projects?.map((project, index) => (
-              <div key={index} className="rounded-lg bg-gray-700/50 p-6">
-                <h3 className="mb-2 text-xl font-medium">
-                  {project.name || `Project ${index + 1}`}
-                </h3>
-                <p className="mb-3 text-gray-300">
-                  {project.description ||
-                    "No description available for this project."}
-                </p>
-                {project.technologies && (
-                  <div className="mb-3">
-                    <p className="mb-1 text-sm font-medium text-gray-400">
-                      Technologies Used:
-                    </p>
-                    <p className="text-sm text-gray-300">
-                      {project.technologies.join(", ")}
-                    </p>
-                  </div>
-                )}
-                {project.link && (
+              <div
+                key={index}
+                className="space-y-4 rounded-lg bg-gray-700/50 p-6"
+              >
+                <div className="flex items-center justify-between">
                   <a
-                    href={project.link}
+                    href={project.github_url}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-blue-400 transition-colors hover:text-blue-300"
+                    className="flex items-center gap-1"
                   >
-                    View Project →
+                    <h3 className="mb-2 text-xl font-medium">
+                      {project.name || `Project ${index + 1}`}
+                    </h3>
+                    <span>
+                      <FiExternalLink />
+                    </span>
                   </a>
-                )}
+                  <Button className="cursor-pointer rounded-lg bg-red-500 px-6 py-3 font-medium text-white transition-all hover:bg-red-600">
+                    DELETE
+                  </Button>
+                </div>
+
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <p className="flex-1 text-gray-300">
+                    {project.description ||
+                      "No description available for this project."}
+                  </p>
+                  <div className="flex justify-center md:justify-end">
+                    <a href={project.livedemo_url} target="_blank">
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="h-48 w-64 rounded-lg object-cover shadow-lg md:h-40 md:w-56"
+                      />
+                    </a>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
