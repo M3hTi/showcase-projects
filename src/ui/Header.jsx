@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaUserPlus } from "react-icons/fa";
 import { useUser } from "../features/authentication/useUser";
 import Button from "../ui/Button";
+import MiniLoading from "./MiniLoading";
 
 function Header() {
   const { user, isAuthenticate } = useUser();
@@ -24,7 +25,7 @@ function Header() {
           </Link>
           {isAuthenticate ? (
             <Button
-              to="profile"
+              to="/profile/my-projects"
               className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
             >
               {user?.user_metadata?.fullname || user.email}
