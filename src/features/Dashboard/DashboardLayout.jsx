@@ -50,7 +50,7 @@ function DashboardLayout() {
             {/* Mobile Navigation Menu */}
             <nav className="mt-8 space-y-2">
               <NavLink
-                to="/profile"
+                to="/profile/edit"
                 end
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
@@ -106,7 +106,7 @@ function DashboardLayout() {
             {/* Navigation Menu */}
             <nav className="mt-8 space-y-2">
               <NavLink
-                to="/profile"
+                to="/profile/edit"
                 end
                 className={({ isActive }) =>
                   `flex items-center rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
