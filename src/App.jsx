@@ -1,18 +1,19 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AppLayout from "./ui/AppLayout";
-import Landing from "./pages/Landing";
-import HomePage from "./pages/HomePage";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import PageNotFound from "./ui/PageNotFound";
-import { Toaster } from "react-hot-toast";
-import ProtectRoute from "./ui/ProtectRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import CreateProject from "./features/Dashboard/CreateProject";
 import DashboardLayout from "./features/Dashboard/DashboardLayout";
 import EditProfile from "./features/Dashboard/EditProfile";
-import CreateProject from "./features/Dashboard/CreateProject";
 import Profile from "./features/Dashboard/Profile";
+import HomePage from "./pages/HomePage";
+import Landing from "./pages/Landing";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import AppLayout from "./ui/AppLayout";
+import PageNotFound from "./ui/PageNotFound";
+import ProtectRoute from "./ui/ProtectRoute";
 
 const queryClient = new QueryClient();
 
