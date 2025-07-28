@@ -59,7 +59,7 @@ function Home() {
             ))}
           </select>
         </div>
-        <Projects />
+        <Projects projects={projects} />
       </div>
     </div>
   );

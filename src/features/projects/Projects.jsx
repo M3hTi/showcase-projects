@@ -1,9 +1,8 @@
 import { useTechnologyFilter } from "../../context/TechnologyContext";
 import Project from "./Project";
-import { useProjects } from "./useProjects";
 
-function Projects() {
-  const { projects } = useProjects();
+
+function Projects({ projects }) {
   const { filterTechnology } = useTechnologyFilter();
 
   const filteredProjects = !filterTechnology
