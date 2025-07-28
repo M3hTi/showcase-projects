@@ -1,13 +1,26 @@
+import { useTechnologyFilter } from "../../context/TechnologyContext";
 import Error from "../../ui/Error";
+import Filter from "../../ui/Filter";
 import Loading from "../../ui/Loading";
 import { useProjects } from "../projects/useProjects";
 import ProfileProject from "./ProfileProject";
 
 function ProfileProjects() {
   const { projects, isLoading, isError, error } = useProjects(true);
+  const { filterTechnology } = useTechnologyFilter();
+
+  const filteredProjects = !filterTechnology
+    ? projects
+    : projects.filter((project) =>
+        project?.tech_stack?.includes(filterTechnology),
+      );
+
   return (
     <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
-      <h2 className="mb-6 text-2xl font-semibold">My Projects</h2>
+      <div className="flex flex-col justify-center pb-4 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="mb-6 text-2xl font-semibold">My Projects</h2>
+        <Filter projects={projects} />
+      </div>
 
       {isLoading && <Loading />}
       {!isLoading && isError && <Error>{error.message}</Error>}
@@ -20,7 +33,7 @@ function ProfileProjects() {
             </p>
           </div>
         )}
-        {projects?.map((project) => (
+        {filteredProjects?.map((project) => (
           <ProfileProject key={project.id} project={project} />
         ))}
       </div>
