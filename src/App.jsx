@@ -13,6 +13,7 @@ import DashboardLayout from "./features/Dashboard/DashboardLayout";
 import EditProfile from "./features/Dashboard/EditProfile";
 import CreateProject from "./features/Dashboard/CreateProject";
 import Profile from "./features/Dashboard/Profile";
+import TechnologyProvider from "./context/TechnologyContext";
 
 const queryClient = new QueryClient();
 
@@ -21,29 +22,31 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<AppLayout />}>
-              <Route index element={<Landing />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectRoute>
-                    <DashboardLayout />
-                  </ProtectRoute>
-                }
-              >
-                <Route path="my-projects" index element={<Profile />} />
-                <Route path="edit" element={<EditProfile />} />
-                <Route path="create-project" element={<CreateProject />} />
+        <TechnologyProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<AppLayout />}>
+                <Route index element={<Landing />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectRoute>
+                      <DashboardLayout />
+                    </ProtectRoute>
+                  }
+                >
+                  <Route path="my-projects" index element={<Profile />} />
+                  <Route path="edit" element={<EditProfile />} />
+                  <Route path="create-project" element={<CreateProject />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TechnologyProvider>
       </QueryClientProvider>
       <Toaster position="top-center" reverseOrder={true} />
     </>

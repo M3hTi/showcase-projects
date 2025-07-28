@@ -33,7 +33,7 @@ export async function getProjects(userId = null) {
  */
 export async function createProjectApi(projectData) {
   try {
-    const { name, description, githubUrl, demoUrl, user_id, image } =
+    const { name, description, githubUrl, demoUrl, user_id, image, techStack } =
       projectData;
 
     const imageFile = image[0];
@@ -41,6 +41,13 @@ export async function createProjectApi(projectData) {
     const imageName = `${Math.random()}-${imageFile?.name}`.replaceAll("/", "");
 
     const imagePath = `${supabaseUrl}/storage/v1/object/public/projects-image//${imageName}`;
+
+    const techArr = (techStack || "")
+      .split(",")
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0)
+      .map((t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
+
 
     const { data, error } = await supabase
       .from("projects")
@@ -52,6 +59,7 @@ export async function createProjectApi(projectData) {
           livedemo_url: demoUrl,
           user_id,
           image: imagePath,
+          tech_stack: techArr,
         },
       ])
       .select();
@@ -78,7 +86,6 @@ export async function createProjectApi(projectData) {
 
 export async function deleteProjectApi(projectId) {
   try {
-    
     const { data: projectToDelete, error: fetchError } = await supabase
       .from("projects")
       .select("name")
@@ -89,12 +96,9 @@ export async function deleteProjectApi(projectId) {
 
     if (fetchError) {
       console.error("Fetch error:", fetchError); // Debug log
-      throw new Error(
-        `You can't fetch this project, Please try again later!!`,
-      );
+      throw new Error(`You can't fetch this project, Please try again later!!`);
     }
 
-    
     const { error: deleteError } = await supabase
       .from("projects")
       .delete()
