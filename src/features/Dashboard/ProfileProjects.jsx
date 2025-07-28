@@ -1,4 +1,5 @@
-import { useTechnologyFilter } from "../../context/TechnologyContext";
+import { useState } from "react";
+
 import Error from "../../ui/Error";
 import Filter from "../../ui/Filter";
 import Loading from "../../ui/Loading";
@@ -7,7 +8,8 @@ import ProfileProject from "./ProfileProject";
 
 function ProfileProjects() {
   const { projects, isLoading, isError, error } = useProjects(true);
-  const { filterTechnology } = useTechnologyFilter();
+
+  const [filterTechnology, setFilterTechnology] = useState("");
 
   const filteredProjects = !filterTechnology
     ? projects
@@ -19,7 +21,11 @@ function ProfileProjects() {
     <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
       <div className="flex flex-col justify-center pb-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="mb-6 text-2xl font-semibold">My Projects</h2>
-        <Filter projects={projects} />
+        <Filter
+          projects={projects}
+          filterTechnology={filterTechnology}
+          setfilterTechnology={setFilterTechnology}
+        />
       </div>
 
       {isLoading && <Loading />}

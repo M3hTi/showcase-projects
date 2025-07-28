@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Error from "../../ui/Error";
 import Filter from "../../ui/Filter";
 import Loading from "../../ui/Loading";
@@ -6,6 +8,7 @@ import { useProjects } from "./useProjects";
 
 function Home() {
   const { projects, isLoading, isError, error } = useProjects();
+  const [filterTechnology, setFilterTechnology] = useState("");
 
   if (isLoading) {
     return <Loading />;
@@ -23,9 +26,9 @@ function Home() {
             <span className="text-white">Featured</span>{" "}
             <span className="text-orange-500">Projects</span>
           </h1>
-          <Filter projects={projects} />
+          <Filter projects={projects} filterTechnology={filterTechnology} setfilterTechnology={setFilterTechnology}/>
         </div>
-        <Projects projects={projects} />
+        <Projects projects={projects} filterTechnology={filterTechnology} />
       </div>
     </div>
   );

@@ -57,7 +57,6 @@ const ProtectRoute = lazy(
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
-import TechnologyProvider from "./context/TechnologyContext";
 import Loading from "./ui/Loading";
 
 const queryClient = new QueryClient();
@@ -68,33 +67,31 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
 
-        <TechnologyProvider>
-          <BrowserRouter>
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<AppLayout />}>
-                  <Route index element={<Landing />} />
-                  <Route path="/home" element={<HomePage />} />
-                  <Route
-                    path="/profile"
-                    element={
-                      <ProtectRoute>
-                        <DashboardLayout />
-                      </ProtectRoute>
-                    }
-                  >
-                    <Route path="my-projects" index element={<Profile />} />
-                    <Route path="edit" element={<EditProfile />} />
-                    <Route path="create-project" element={<CreateProject />} />
-                  </Route>
+        <BrowserRouter>
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route path="/" element={<AppLayout />}>
+                <Route index element={<Landing />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectRoute>
+                      <DashboardLayout />
+                    </ProtectRoute>
+                  }
+                >
+                  <Route path="my-projects" index element={<Profile />} />
+                  <Route path="edit" element={<EditProfile />} />
+                  <Route path="create-project" element={<CreateProject />} />
                 </Route>
-                <Route path="/signup" element={<SignupPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="*" element={<PageNotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TechnologyProvider>
+              </Route>
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
       </QueryClientProvider>
       <Toaster position="top-center" reverseOrder={true} />
     </>
