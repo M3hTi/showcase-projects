@@ -31,8 +31,10 @@ function CreateProject() {
     <div className="p-8">
       <div className="mx-auto max-w-3xl">
         <div className="rounded-xl bg-gray-800/40 p-8 backdrop-blur-sm">
-          <h1 className="mb-6 text-2xl font-bold text-orange-500">Create New Project</h1>
-          
+          <h1 className="mb-6 text-2xl font-bold text-orange-500">
+            Create New Project
+          </h1>
+
           <form className="space-y-6" onSubmit={handleSubmit(submit)}>
             <div>
               <label className="block text-sm font-medium text-gray-400">
@@ -47,9 +49,7 @@ function CreateProject() {
                   required: "Please enter a name for your project",
                 })}
               />
-              {errors?.name?.message && (
-                <Error>{errors?.name?.message}</Error>
-              )}
+              {errors?.name?.message && <Error>{errors?.name?.message}</Error>}
             </div>
 
             <div>
@@ -83,8 +83,10 @@ function CreateProject() {
                   {...register("githubUrl", {
                     required: "Please enter a github URL.",
                     pattern: {
-                      value: /^https:\/\/github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+\/?$/,
-                      message: "Please enter a valid GitHub repository URL in the format: https://github.com/username/repository.",
+                      value:
+                        /^https:\/\/github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9._-]+\/?$/,
+                      message:
+                        "Please enter a valid GitHub repository URL in the format: https://github.com/username/repository.",
                     },
                   })}
                 />
@@ -105,6 +107,25 @@ function CreateProject() {
                   {...register("demoUrl")}
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-400">
+                Tech Stack
+              </label>
+              <textarea
+                name="techStack"
+                rows="2"
+                {...register("techStack", {
+                  required:
+                    "Please specify at least one technology used in your project",
+                })}
+                className="mt-1 w-full rounded-lg bg-gray-800 p-3 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                placeholder="React, TailwindCSS, Supabase, etc."
+              ></textarea>
+              {errors?.techStack?.message && (
+                <Error>{errors?.techStack?.message}</Error>
+              )}
             </div>
 
             <div>
