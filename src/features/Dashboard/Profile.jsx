@@ -1,17 +1,16 @@
-import { useUser } from "../authentication/useUser";
 import Button from "../../ui/Button";
 import MiniLoading from "../../ui/MiniLoading";
 import { useLogout } from "../authentication/useLogout";
+import { useUser } from "../authentication/useUser";
 import ProfileProjects from "./ProfileProjects";
 
 function Profile() {
   const { user } = useUser();
   const { logOut, isPending } = useLogout();
-  
 
   const {
     email,
-    user_metadata: { fullname, expertiseArr, bio },
+    user_metadata: { full_name, expertiseArr, bio },
   } = user || {};
 
   return (
@@ -22,7 +21,7 @@ function Profile() {
           <h2 className="mb-6 text-2xl font-semibold">Developer Biography</h2>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <p className="text-xl">{fullname || email}</p>
+              <p className="text-xl">{full_name || email}</p>
               <Button
                 onClick={logOut}
                 className="cursor-pointer rounded-lg bg-red-500 px-6 py-3 font-medium text-white transition-all hover:bg-red-600"

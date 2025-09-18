@@ -77,10 +77,14 @@ export async function getCurrentUser() {
   }
 }
 
-export async function updateUser({ email, password, data: { fullname, bio, expertiseArr } }) {
+export async function updateUser({
+  email,
+  password,
+  data: { fullname, bio, expertiseArr },
+}) {
   try {
     const updateData = {
-      data: { fullname, bio, expertiseArr },
+      data: { full_name: fullname, bio, expertiseArr },
     };
 
     if (email) {
@@ -96,6 +100,12 @@ export async function updateUser({ email, password, data: { fullname, bio, exper
       throw new Error(
         `You can't update information at this point!, pls comeback later.`,
       );
+
+    console.log(
+      "%c📝 LOG: new information about user is:",
+      "color: #10B981; font-weight: bold",
+      data,
+    );
   } catch (error) {
     console.log(error.message);
     throw error;

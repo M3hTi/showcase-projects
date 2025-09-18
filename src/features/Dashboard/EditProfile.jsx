@@ -1,11 +1,11 @@
-import Button from "../../ui/Button";
-import { useUser } from "../authentication/useUser";
-import { useLogout } from "../authentication/useLogout";
-import MiniLoading from "../../ui/MiniLoading";
 import { useForm } from "react-hook-form";
-import Error from "../../ui/Error";
-import { useUpdateInfo } from "./useUpdateInfo";
 import toast from "react-hot-toast";
+
+import Button from "../../ui/Button";
+import Error from "../../ui/Error";
+import MiniLoading from "../../ui/MiniLoading";
+import { useUser } from "../authentication/useUser";
+import { useUpdateInfo } from "./useUpdateInfo";
 
 function EditProfile() {
   const { user } = useUser();
@@ -16,14 +16,7 @@ function EditProfile() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-      email: user?.email,
-      fullname: user?.user_metadata?.fullname,
-      bio: user?.user_metadata?.bio,
-      expertise: user?.user_metadata?.expertiseArr?.join(","),
-    },
-  });
+  } = useForm();
 
   function submit(data) {
     console.log(data);
@@ -70,6 +63,7 @@ function EditProfile() {
                   Full Name
                 </label>
                 <input
+                  defaultValue={user?.user_metadata?.full_name}
                   type="text"
                   className="mt-1 w-full rounded-lg bg-gray-800 p-3 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
                   placeholder="Enter your full name"
@@ -87,6 +81,7 @@ function EditProfile() {
                   Email
                 </label>
                 <input
+                  defaultValue={user?.email}
                   type="email"
                   className="mt-1 w-full rounded-lg bg-gray-800 p-3 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
                   placeholder="Enter your email"
@@ -131,6 +126,7 @@ function EditProfile() {
                 Expertise
               </label>
               <input
+                defaultValue={user?.user_metadata?.expertiseArr?.join(",")}
                 type="text"
                 className="mt-1 w-full rounded-lg bg-gray-800 p-3 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
                 placeholder="Please Enter Your Expertise (comma separated)"
@@ -148,6 +144,7 @@ function EditProfile() {
                 Bio
               </label>
               <textarea
+                defaultValue={user?.user_metadata?.bio}
                 className="mt-1 w-full rounded-lg bg-gray-800 p-3 text-white focus:ring-2 focus:ring-orange-500 focus:outline-none"
                 placeholder="Tell us about yourself"
                 rows="4"

@@ -5,7 +5,7 @@ import supabase, { supabaseUrl } from "./supabase";
  */
 export async function getProjects(userId = null) {
   try {
-    let query = supabase.from("projects").select("*");
+    let query = supabase.from("projects").select("*,user_id(full_name)");
 
     if (userId) {
       query = await query.eq("user_id", userId);
@@ -47,7 +47,6 @@ export async function createProjectApi(projectData) {
       .map((t) => t.trim())
       .filter((t) => t.length > 0)
       .map((t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase());
-
 
     const { data, error } = await supabase
       .from("projects")

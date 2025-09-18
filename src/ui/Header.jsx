@@ -42,7 +42,7 @@ function Header() {
               to="/profile/my-projects"
               className="flex items-center gap-2 rounded-lg bg-orange-500 px-6 py-2.5 font-medium text-white transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25"
             >
-              {user?.user_metadata?.fullname || user.email}
+              {user?.user_metadata?.full_name || user.email}
             </Button>
           )}
         </div>
