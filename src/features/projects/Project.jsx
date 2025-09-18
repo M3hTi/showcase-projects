@@ -6,8 +6,10 @@ function Project({ project }) {
     github_url,
     image,
     tech_stack,
-    user_id: { full_name },
+    user_id,
   } = project;
+
+  const { full_name } = user_id || {};
 
   console.log(
     "%c🔍 DEBUG: name of articls's writer:",
@@ -51,7 +53,7 @@ function Project({ project }) {
         </div>
         <h2 className="mb-3 text-xl font-semibold text-white">{name}</h2>
         <p className="mb-6 text-gray-300">{description}</p>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           {livedemo_url && (
             <a
               href={livedemo_url}
