@@ -37,7 +37,7 @@ function Home() {
         </div>
         <Projects projects={projects} filterTechnology={filterTechnology} />
         <div>
-          <Pagination projectsCount={projectsCount} />
+          <Pagination projectsCount={projectsCount} filterTechnology={filterTechnology} />
         </div>
       </div>
     </div>

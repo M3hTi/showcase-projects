@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { PAGE_SIZE, usePaginate } from "../context/PaginateContext";
 import Button from "./Button";
 
-function Pagination({ projectsCount }) {
+function Pagination({ projectsCount, filterTechnology }) {
   const { currPage, setCurrPage } = usePaginate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -41,35 +41,39 @@ function Pagination({ projectsCount }) {
   }, [searchParams, setSearchParams, setCurrPage]);
 
   return (
-    <div className="flex items-center text-white">
-      {currPage !== 1 && (
-        <Button
-          className="cursor-pointer"
-          onClick={() => handleDirection("backward")}
-        >
-          <HiChevronLeft className="h-6 w-6" />
-        </Button>
-      )}
-      {Array.from({ length: pagesCount }, (_, i) => {
-        return (
-          <button
-            className={`cursor-pointer ${i + 1 === currPage ? "text-blue-400" : ""}`}
-            key={i}
-          >
-            {i + 1}
-          </button>
-        );
-      })}
+    <>
+      {!filterTechnology && (
+        <div className="flex items-center text-white">
+          {currPage !== 1 && (
+            <Button
+              className="cursor-pointer"
+              onClick={() => handleDirection("backward")}
+            >
+              <HiChevronLeft className="h-6 w-6" />
+            </Button>
+          )}
+          {Array.from({ length: pagesCount }, (_, i) => {
+            return (
+              <button
+                className={`cursor-pointer ${i + 1 === currPage ? "text-blue-400" : ""}`}
+                key={i}
+              >
+                {i + 1}
+              </button>
+            );
+          })}
 
-      {currPage !== pagesCount && (
-        <Button
-          className="cursor-pointer"
-          onClick={() => handleDirection("forward")}
-        >
-          <HiChevronRight className="h-6 w-6" />
-        </Button>
+          {currPage !== pagesCount && (
+            <Button
+              className="cursor-pointer"
+              onClick={() => handleDirection("forward")}
+            >
+              <HiChevronRight className="h-6 w-6" />
+            </Button>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }
 
