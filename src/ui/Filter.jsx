@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function Filter({ projects, filterTechnology, setfilterTechnology }) {
@@ -38,6 +39,11 @@ function Filter({ projects, filterTechnology, setfilterTechnology }) {
 
     setfilterTechnology(e.target.value);
   }
+
+  useEffect(() => {
+    const params = searchParams.get("filterBy") || null;
+    setfilterTechnology(params);
+  }, [searchParams, setfilterTechnology]);
 
   return (
     <div>
