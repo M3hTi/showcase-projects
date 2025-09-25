@@ -3,12 +3,15 @@ import { useState } from "react";
 import Error from "../../ui/Error";
 import Filter from "../../ui/Filter";
 import Loading from "../../ui/Loading";
+import Pagination from "../../ui/Pagination";
 import Projects from "./Projects";
 import { useProjects } from "./useProjects";
 
 function Home() {
   const { projects, isLoading, isError, error } = useProjects();
   const [filterTechnology, setFilterTechnology] = useState("");
+
+  const projectsCount = projects?.length;
 
   if (isLoading) {
     return <Loading />;
@@ -26,9 +29,16 @@ function Home() {
             <span className="text-white">Featured</span>{" "}
             <span className="text-orange-500">Projects</span>
           </h1>
-          <Filter projects={projects} filterTechnology={filterTechnology} setfilterTechnology={setFilterTechnology}/>
+          <Filter
+            projects={projects}
+            filterTechnology={filterTechnology}
+            setfilterTechnology={setFilterTechnology}
+          />
         </div>
         <Projects projects={projects} filterTechnology={filterTechnology} />
+        <div>
+          <Pagination projectsCount={projectsCount} />
+        </div>
       </div>
     </div>
   );

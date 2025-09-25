@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
 
 import App from "./App.jsx";
+import PaginateProvider from "./context/PaginateContext.jsx";
 import FallBackError from "./ui/FallBackError.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -13,7 +14,9 @@ createRoot(document.getElementById("root")).render(
     onReset={() => window.location.replace("/")}
   >
     <StrictMode>
-      <App />
+      <PaginateProvider>
+        <App />
+      </PaginateProvider>
     </StrictMode>
   </ErrorBoundary>,
 );
