@@ -3,12 +3,16 @@ import supabase, { supabaseUrl } from "./supabase";
  * Fetches all projects from the Supabase database
  * @returns {Promise<Array>} Array of project objects, or undefined if there's an error
  */
-export async function getProjects(userId = null) {
+export async function getProjects(userId = null, filter = "") {
   try {
     let query = supabase.from("projects").select("*,user_id(full_name)");
 
     if (userId) {
       query = await query.eq("user_id", userId);
+    }
+
+    if (filter) {
+      query = query.contains("tech_stack", [filter]);
     }
 
     let { data: projects, error } = await query;

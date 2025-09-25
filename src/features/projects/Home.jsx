@@ -7,8 +7,8 @@ import Projects from "./Projects";
 import { useProjects } from "./useProjects";
 
 function Home() {
-  const { projects, isLoading, isError, error } = useProjects();
   const [filterTechnology, setFilterTechnology] = useState("");
+  const { projects, isLoading, isError, error } = useProjects(false, filterTechnology);
 
   if (isLoading) {
     return <Loading />;
@@ -26,7 +26,7 @@ function Home() {
             <span className="text-white">Featured</span>{" "}
             <span className="text-orange-500">Projects</span>
           </h1>
-          <Filter projects={projects} filterTechnology={filterTechnology} setfilterTechnology={setFilterTechnology}/>
+          <Filter  filterTechnology={filterTechnology} setfilterTechnology={setFilterTechnology}/>
         </div>
         <Projects projects={projects} filterTechnology={filterTechnology} />
       </div>
