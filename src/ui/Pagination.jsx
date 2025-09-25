@@ -32,12 +32,13 @@ function Pagination({ projectsCount }) {
   useEffect(() => {
     const params = searchParams.get("page") || null;
     if (params) {
+      setCurrPage(Number(params));
       setSearchParams(searchParams);
     } else {
       searchParams.set("page", 1);
       setSearchParams(searchParams);
     }
-  }, [searchParams, setSearchParams]);
+  }, [searchParams, setSearchParams, setCurrPage]);
 
   return (
     <div className="flex items-center text-white">
