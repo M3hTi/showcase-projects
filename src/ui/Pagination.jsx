@@ -29,6 +29,12 @@ function Pagination({ projectsCount, filterTechnology }) {
     }
   }
 
+  function handlePageClick(pageNumber) {
+    setCurrPage(pageNumber);
+    searchParams.set("page", pageNumber);
+    setSearchParams(searchParams);
+  }
+
   useEffect(() => {
     const params = searchParams.get("page") || null;
     if (params) {
@@ -40,40 +46,41 @@ function Pagination({ projectsCount, filterTechnology }) {
     }
   }, [searchParams, setSearchParams, setCurrPage]);
 
-  return (
-    <>
-      {!filterTechnology && (
-        <div className="flex items-center text-white">
-          {currPage !== 1 && (
-            <Button
-              className="cursor-pointer"
-              onClick={() => handleDirection("backward")}
-            >
-              <HiChevronLeft className="h-6 w-6" />
-            </Button>
-          )}
-          {Array.from({ length: pagesCount }, (_, i) => {
-            return (
-              <button
-                className={`cursor-pointer ${i + 1 === currPage ? "text-blue-400" : ""}`}
-                key={i}
-              >
-                {i + 1}
-              </button>
-            );
-          })}
+  if (pagesCount < 1 || filterTechnology) return null;
 
-          {currPage !== pagesCount && (
-            <Button
-              className="cursor-pointer"
-              onClick={() => handleDirection("forward")}
-            >
-              <HiChevronRight className="h-6 w-6" />
-            </Button>
-          )}
-        </div>
+  return (
+    <div className="mt-12 mb-8 flex items-center justify-center gap-2">
+      {currPage !== 1 && (
+        <Button
+          className={`flex h-10 w-10 items-center justify-center rounded-lg border transition-all duration-200 ${currPage === 1 ? "cursor-not-allowed border-gray-600 text-gray-500" : "border-gray-600 text-gray-300 hover:border-orange-500 hover:bg-orange-500/10 hover:text-orange-500"}`}
+          onClick={() => handleDirection("backward")}
+        >
+          <HiChevronLeft className="h-6 w-6" />
+        </Button>
       )}
-    </>
+      <div className="flex items-center gap-1">
+        {Array.from({ length: pagesCount }, (_, i) => {
+          return (
+            <button
+              onClick={() => handlePageClick(i + 1)}
+              className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg font-medium transition-all duration-200 ${i + 1 === currPage ? "border border-orange-500 bg-orange-500 text-white shadow-lg" : "border border-gray-600 text-gray-300 hover:border-orange-500 hover:bg-orange-500/10 hover:text-orange-500"}`}
+              key={i}
+            >
+              {i + 1}
+            </button>
+          );
+        })}
+      </div>
+
+      {currPage !== pagesCount && (
+        <Button
+          className={`flex h-10 w-10 items-center justify-center rounded-lg border transition-all duration-200 ${currPage === pagesCount ? "cursor-not-allowed border-gray-600 text-gray-500" : "border-gray-600 text-gray-300 hover:border-orange-500 hover:bg-orange-500/10 hover:text-orange-500"}`}
+          onClick={() => handleDirection("forward")}
+        >
+          <HiChevronRight className="h-6 w-6" />
+        </Button>
+      )}
+    </div>
   );
 }
 
