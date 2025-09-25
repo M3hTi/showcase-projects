@@ -1,10 +1,13 @@
+import { useEffect } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { useSearchParams } from "react-router-dom";
 
 import { PAGE_SIZE, usePaginate } from "../context/PaginateContext";
 import Button from "./Button";
 
 function Pagination({ projectsCount }) {
   const { currPage, setCurrPage } = usePaginate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const pagesCount = Math.ceil(projectsCount / PAGE_SIZE);
 
@@ -17,10 +20,24 @@ function Pagination({ projectsCount }) {
   function handleDirection(direction) {
     if (direction === "backward") {
       setCurrPage((cp) => (cp !== 1 ? cp - 1 : 1));
+      searchParams.set("page", currPage - 1);
+      setSearchParams(searchParams);
     } else {
       setCurrPage((cp) => (cp !== pagesCount ? cp + 1 : pagesCount));
+      searchParams.set("page", currPage + 1);
+      setSearchParams(searchParams);
     }
   }
+
+  useEffect(() => {
+    const params = searchParams.get("page") || null;
+    if (params) {
+      setSearchParams(searchParams);
+    } else {
+      searchParams.set("page", 1);
+      setSearchParams(searchParams);
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <div className="flex items-center text-white">
