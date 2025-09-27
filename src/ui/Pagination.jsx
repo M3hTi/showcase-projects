@@ -46,6 +46,16 @@ function Pagination({ projectsCount, filterTechnology }) {
     }
   }, [searchParams, setSearchParams, setCurrPage]);
 
+  useEffect(() => {
+    const currentPage = searchParams.get("page");
+    if (filterTechnology && currentPage > 1) {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set("page", 1);
+      newParams.set("filterBy", filterTechnology); 
+      setSearchParams(newParams);
+    }
+  }, [filterTechnology, searchParams, setSearchParams]);
+
   if (pagesCount < 1 || filterTechnology) return null;
 
   return (
