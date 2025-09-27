@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-function Filter({ projects, filterTechnology, setfilterTechnology }) {
+import { useProjects } from "../features/projects/useProjects";
+
+function Filter({ filterTechnology, setfilterTechnology }) {
   //   const { filterTechnology, setFilterTechnology } = useTechnologyFilter();
+  const { projects } = useProjects();
 
   const [searchParams, setSearchParams] = useSearchParams();
 

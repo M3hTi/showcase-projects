@@ -8,8 +8,11 @@ import Projects from "./Projects";
 import { useProjects } from "./useProjects";
 
 function Home() {
-  const { projects, isLoading, isError, error } = useProjects();
   const [filterTechnology, setFilterTechnology] = useState("");
+  const { projects, isLoading, isError, error } = useProjects(
+    false,
+    filterTechnology,
+  );
 
   const projectsCount = projects?.length;
 
@@ -29,15 +32,18 @@ function Home() {
             <span className="text-white">Featured</span>{" "}
             <span className="text-orange-500">Projects</span>
           </h1>
+
           <Filter
-            projects={projects}
             filterTechnology={filterTechnology}
             setfilterTechnology={setFilterTechnology}
           />
         </div>
         <Projects projects={projects} filterTechnology={filterTechnology} />
         <div>
-          <Pagination projectsCount={projectsCount} filterTechnology={filterTechnology} />
+          <Pagination
+            projectsCount={projectsCount}
+            filterTechnology={filterTechnology}
+          />
         </div>
       </div>
     </div>
